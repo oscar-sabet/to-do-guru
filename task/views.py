@@ -31,6 +31,28 @@ def index(request):
 
 
 @login_required
+def task_board(request):
+    not_started_tasks = Task.objects.filter(user=request.user, status="P")
+    in_progress_tasks = Task.objects.filter(user=request.user, status="IP")
+    completed_tasks = Task.objects.filter(user=request.user, status="C")
+    context = {
+        "not_started_tasks": not_started_tasks,
+        "in_progress_tasks": in_progress_tasks,
+        "completed_tasks": completed_tasks,
+    }
+    return render(request, "task/task_board.html", context)
+
+
+@login_required
+def update_task_status(request, task_id):
+    task = get_object_or_404(Task, id=task_id, user=request.user)
+    if request.method == "POST":
+        task.status = request.POST.get("status")
+        task.save()
+    return redirect("task_board")
+
+
+@login_required
 def create_task(request):
     if request.method == "POST":
         form = TaskForm(request.POST)

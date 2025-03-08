@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}Home{% endblock %}
 {% block content %}
-    <header class="bg-light py-5">
+    <header class="bg-1 xpy-5">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6">
@@ -10,20 +10,20 @@
                     <p class="lead">
                         Your ultimate task management tool. Organize your tasks, set priorities, and stay on top of your to-do list.
                     </p>
-                    <a href="{% url 'register' %}" class="btn btn-primary btn-lg">Get Started</a>
-                    <a href="{% url 'login' %}" class="btn btn-secondary btn-lg">Login</a>
+                    <a href="{% url 'register' %}" class="btn btn-custom-1 btn-lg">Get Started</a>
+                    <a href="{% url 'login' %}" class="btn btn-custom-2 btn-lg">Login</a>
                 </div>
                 <div class="col-md-6">
-                    <img src="{% static 'task/img/task_manager.png' %}"
+                    <img src="{% static 'images/Todo-Cloud-Done-green.png' %}"
                          alt="Task Manager"
                          class="img-fluid">
                 </div>
             </div>
         </div>
     </header>
-    <section id="features" class="py-5">
+    <section id="features" class="xpy-5 bg-5">
         <div class="container">
-            <h2 class="text-center mb-4">Features</h2>
+            <h2 class="text-center mb-4 display-5">Features</h2>
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card mb-4">
@@ -37,7 +37,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="card mb-4">
-                        <div class="card-header text-center">Priority Setting</div>
+                        <div class="card-header text-center ">Priority Setting</div>
                         <div class="card-body text-center">
                             <p class="card-text">
                                 Set priorities for your tasks to focus on what matters most. Keep track of high-priority tasks and deadlines.
@@ -58,9 +58,9 @@
             </div>
         </div>
     </section>
-    <section id="testimonials" class="bg-light py-5">
+    <section id="testimonials" class="bg-3 xpy-5">
         <div class="container">
-            <h2 class="text-center mb-4">What Our Users Say</h2>
+            <h2 class="text-center mb-4 display-5">What Our Users Say</h2>
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card mb-4">
@@ -101,10 +101,52 @@
             </div>
         </div>
     </section>
-    <section id="cta" class="py-5">
+    <section id="cta" class="xpy-5 bg-4">
         <div class="container text-center">
             <h2 class="mb-4">Ready to Get Started?</h2>
-            <a href="{% url 'register' %}" class="btn btn-primary btn-lg">Sign Up Now</a>
+            <a href="{% url 'register' %}" class="btn btn-custom-2 btn-lg">Sign Up Now</a>
         </div>
     </section>
+    <footer class="bg-light text-center text-lg-start">
+        <div class="container p-4">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">ToDoGuru</h5>
+                    <p>Your ultimate task management tool. Organize your tasks, set priorities, and stay on top of your to-do list.</p>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Links</h5>
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="{% url 'home' %}" class="text-dark">Home</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'about' %}" class="text-dark">About</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'index' %}" class="text-dark">Tasks</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Follow Us</h5>
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="https://github.com/yourusername" class="text-dark"><i class="fab fa-github"></i> GitHub</a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/yourusername" class="text-dark"><i class="fab fa-twitter"></i> Twitter</a>
+                        </li>
+                        <li>
+                            <a href="https://facebook.com/yourusername" class="text-dark"><i class="fab fa-facebook"></i> Facebook</a>
+                        </li>
+                        <li>
+                            <a href="https://linkedin.com/in/yourusername" class="text-dark"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="text-center p-3 bg-dark text-white">© 2025 ToDoGuru. All rights reserved.</div>
+    </footer>
 {% endblock %}

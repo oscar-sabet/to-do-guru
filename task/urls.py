@@ -11,5 +11,11 @@ urlpatterns = [
     path("login/", views.CustomLoginView.as_view(), name="login"),
     path("logout/", views.CustomLogoutView.as_view(), name="logout"),
     path("register/", views.register, name="register"),
+    path("task_board/", views.task_board, name="task_board"),
+    path(
+        "update_task_status/<int:task_id>/",
+        views.update_task_status,
+        name="update_task_status",
+    ),
     path("summernote/", include("django_summernote.urls")),
 ]

@@ -8,7 +8,7 @@
             data-bs-toggle="modal"
             data-bs-target="#new-task">Create New Task</button>
     <!-- Modal -->
-    <div class="modal fade"
+    <div class="modal fade modal-xl"
          id="new-task"
          tabindex="-1"
          aria-labelledby="new-task-label"
@@ -41,15 +41,10 @@
         {{ form.as_p }}
         <input type="submit" value="Create Task" class="btn btn-success">
     </form> {% endcomment %}
-    {% for t in tasks %}
+    {% comment %} {% for t in tasks %}
         <div id="task-{{ t.id }}">
             <a href="{% url 'update_task' t.id %}" class="btn btn-primary">Update</a>
-            <button type="button"
-                    class="btn btn-danger"
-                    data-bs-toggle="modal"
-                    data-bs-target="#deleteModal"
-                    data-task-id="{{ t.id }}"
-                    data-task-title="{{ t.title }}">Delete</button>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-task-id="{{ t.id }}" data-task-title="{{ t.title }}">Delete</button>
             <h3>{{ t.title }}</h3>
             <p>{{ t.get_status_display }}</p>
             <p>{{ t.created }}</p>
@@ -61,7 +56,59 @@
             <p>{{ t.completed }}</p>
             <p>{{ t.completed_date }}</p>
         </div>
-    {% endfor %}
+    {% endfor %} {% endcomment %}
+    <div class="m-4">
+        <div class="accordion accordion-flush" id="tasks-accordion">
+            {% for t in tasks %}
+                <div class="accordion-item border-2 shadow-lg">
+                    <h2 class="accordion-header border-2">
+                        <button class="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#flush-collapse{{ t.id }}"
+                                aria-expanded="false"
+                                aria-controls="flush-collapse{{ t.id }}">
+                            {% if t.priority == 'H' %}
+                                <i class="fa-solid fa-exclamation-circle text-danger me-2">  </i>
+                            {% elif t.priority == 'M' %}
+                                <i class="fa-solid fa-exclamation-triangle text-warning me-2">   </i>
+                            {% elif t.priority == 'L' %}
+                                <i class="fa-solid fa-check-circle text-success me-2">   </i>
+                            {% else %}
+                                <i class="fa-solid fa-circle text-muted me-2"></i>
+                            {% endif %}
+                            {{ t.title }}
+                            <span class="ms-auto">Due: {{ t.due_date|date:"Y-j-f" }}</span>
+                        </button>
+                    </h2>
+                    <div id="flush-collapse{{ t.id }}"
+                         class="accordion-collapse collapse"
+                         data-bs-parent="#tasks-accordion">
+                        <div class="accordion-body">
+                            <p>Status: {{ t.get_status_display }}</p>
+                            <p>Created: {{ t.created }}</p>
+                            <p>Due Date: {{ t.due_date }}</p>
+                            <p>Priority: {{ t.get_priority_display }}</p>
+                            <p>Description: {{ t.description|safe }}</p>
+                            <p>Category: {{ t.get_category_display }}</p>
+                            <p>User: {{ t.user }}</p>
+                            {% comment %} <p>{{ t.completed }}</p> {% endcomment %}
+                            <p>Completed Date: {{ t.completed_date }}</p>
+                            <div class="ms-auto">
+                                <a href="{% url 'update_task' t.id %}" class="btn btn-primary">Update</a>
+                                <button type="button"
+                                        class="btn btn-danger"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#deleteModal"
+                                        data-task-id="{{ t.id }}"
+                                        data-task-title="{{ t.title }}">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
     <!-- Delete Confirmation Modal -->
     <div class="modal fade"
          id="deleteModal"
