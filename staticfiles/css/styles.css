@@ -1,0 +1,20 @@
+:root {
+  --teal: #91ddcf;
+  --beige: #f3f0e1;
+  --green: #d5e5d5;
+  --blue: #adb2d4;
+  --peach: #fad0c4;
+  --orange: #f0a04b;
+  --yellow: #fada7a;
+}
+/* nav li::after {
+  content: '/';
+}
+nav li:last-child a::after {
+  content: '';
+} */
+*,
+body {
+  color: #91ddcf;
+  font-family: 'Roboto', sans-serif;
+}
