@@ -17,5 +17,6 @@ urlpatterns = [
         views.update_task_status,
         name="update_task_status",
     ),
+    path("task_report/", views.task_report, name="task_report"),
     path("summernote/", include("django_summernote.urls")),
 ]

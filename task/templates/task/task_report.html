@@ -1,0 +1,27 @@
+{% extends "task/base.html" %}
+{% block title %}Task Report{% endblock %}
+{% block content %}
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Task Report</h2>
+        <div class="row">
+            <div class="col-md-6 col-lg-4 px-0">
+                <h3 class="text-center">Task Status Distribution</h3>
+                <img src="data:image/png;base64,{{ status_chart }}"
+                     class="img-fluid"
+                     alt="Task Status Chart">
+            </div>
+            <div class="col-md-6 col-lg-4 px-0">
+                <h3 class="text-center">Task Priority Distribution</h3>
+                <img src="data:image/png;base64,{{ priority_chart }}"
+                     class="img-fluid"
+                     alt="Task Priority Chart">
+            </div>
+            <div class="col-md-6 col-lg-4 px-0">
+                <h3 class="text-center">Task Category Distribution</h3>
+                <img src="data:image/png;base64,{{ category_chart }}"
+                     class="img-fluid"
+                     alt="Task Category Chart">
+            </div>
+            <div class="row mt-4"></div>
+        </div>
+    {% endblock %}

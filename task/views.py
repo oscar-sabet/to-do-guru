@@ -4,6 +4,10 @@ from .models import Task
 from .forms import TaskForm, LoginForm, RegistrationForm
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import login
+import matplotlib.pyplot as plt
+import io
+import base64
+from django.db.models import Count
 
 # from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -28,6 +32,32 @@ def index(request):
 
     context = {"tasks": tasks, "form": form}
     return render(request, "task/tasks.html", context)
+
+
+# def task_board(request):
+#     status_filter = request.GET.get("status")
+#     priority_filter = request.GET.get("priority")
+#     due_date_filter = request.GET.get("due_date")
+
+#     tasks = Task.objects.filter(user=request.user)
+
+#     if status_filter:
+#         tasks = tasks.filter(status=status_filter)
+#     if priority_filter:
+#         tasks = tasks.filter(priority=priority_filter)
+#     if due_date_filter:
+#         tasks = tasks.filter(due_date=due_date_filter)
+
+#     not_started_tasks = tasks.filter(status="N")
+#     in_progress_tasks = tasks.filter(status="I")
+#     completed_tasks = tasks.filter(status="C")
+
+#     context = {
+#         "not_started_tasks": not_started_tasks,
+#         "in_progress_tasks": in_progress_tasks,
+#         "completed_tasks": completed_tasks,
+#     }
+#     return render(request, "task/task_board.html", context)
 
 
 @login_required
@@ -98,6 +128,66 @@ def register(request):
     else:
         form = RegistrationForm()
     return render(request, "task/register.html", {"form": form})
+
+
+@login_required
+def task_report(request):
+    tasks = Task.objects.filter(user=request.user)
+    status_counts = tasks.values("status").annotate(count=Count("status"))
+    priority_counts = tasks.values("priority").annotate(count=Count("priority"))
+    category_counts = tasks.values("category").annotate(count=Count("category"))
+
+    # Generate a pie chart for task status
+    status_labels = [
+        Task(status=status["status"]).get_status_display() for status in status_counts
+    ]
+    status_sizes = [status["count"] for status in status_counts]
+    plt.figure(figsize=(6, 6))
+    plt.pie(status_sizes, labels=status_labels, autopct="%1.1f%%", startangle=140)
+    plt.axis("equal")
+    status_chart = io.BytesIO()
+    plt.savefig(status_chart, format="png")
+    status_chart.seek(0)
+    status_chart_base64 = base64.b64encode(status_chart.read()).decode("utf-8")
+
+    # Generate a bar chart for task priority
+    priority_labels = [
+        Task(priority=priority["priority"]).get_priority_display()
+        for priority in priority_counts
+    ]
+    priority_sizes = [priority["count"] for priority in priority_counts]
+    plt.figure(figsize=(8, 6))
+    plt.bar(priority_labels, priority_sizes, color="skyblue")
+    plt.xlabel("Priority")
+    plt.ylabel("Count")
+    plt.title("Task Priority Distribution")
+    priority_chart = io.BytesIO()
+    plt.savefig(priority_chart, format="png")
+    priority_chart.seek(0)
+    priority_chart_base64 = base64.b64encode(priority_chart.read()).decode("utf-8")
+
+    # Generate a bar chart for task category
+    category_labels = [
+        Task(category=category["category"]).get_category_display()
+        for category in category_counts
+    ]
+    category_sizes = [category["count"] for category in category_counts]
+    plt.figure(figsize=(8, 6))
+    plt.bar(category_labels, category_sizes, color="lightgreen")
+    plt.xlabel("Category")
+    plt.ylabel("Count")
+    plt.title("Task Category Distribution")
+    category_chart = io.BytesIO()
+    plt.savefig(category_chart, format="png")
+    category_chart.seek(0)
+    category_chart_base64 = base64.b64encode(category_chart.read()).decode("utf-8")
+
+    context = {
+        "status_chart": status_chart_base64,
+        "priority_chart": priority_chart_base64,
+        "category_chart": category_chart_base64,
+    }
+    return render(request, "task/task_report.html", context)
 
 
 class CustomLoginView(LoginView):

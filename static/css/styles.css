@@ -2,14 +2,14 @@
   --teal: #e5fff9;
   --beige: #f3f0e1;
   --green: #d5e5d5;
-  --blue: #caccd7;
+  --blue: #e8eaf0;
   --peach: #eeeae9;
   --orange: #f0a04b;
   --yellow: #fff9e3;
   --fg: #333;
   --bg: #ffffff;
   --border: #adb2d4;
-  --link: #91ddcf;
+  --link: #c6dbd7;
   --link-hover: #f0a04b;
   --red: #edcabf;
 
@@ -79,6 +79,18 @@
 .bg-8 {
   background-color: var(--red);
 }
+.brand-1 {
+  color: #00d74b;
+}
+.brand-2 {
+  color: #f3531d;
+}
+.brand-3 {
+  color: var(--fg);
+}
+.brand-4 {
+  color: #006aff;
+}
 
 *,
 body {
@@ -88,6 +100,8 @@ body {
   font-family: 'Roboto', sans-serif;
   /* margin: 0; */
   /* padding: 0; */
+  max-width: 100%;
+  /* overflow-x: hidden; */
 }
 
 #navbar.navbar {
@@ -103,22 +117,11 @@ body {
 #navbar-container * {
   background-color: var(--blue-pastel);
 }
-.brand-1 {
-  color: #00d74b;
-}
-.brand-2 {
-  color: #f3531d;
-}
-.brand-3 {
-  color: var(--fg);
-}
-.brand-4 {
-  color: #ff8400;
-}
 
 /* Generic */
 section {
   padding: 6rem 0;
+  height: 500px;
 }
 /* Cards */
 .card {
