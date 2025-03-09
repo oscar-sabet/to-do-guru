@@ -1,0 +1,167 @@
+:root {
+  --teal: #e5fff9;
+  --beige: #f3f0e1;
+  --green: #d5e5d5;
+  --blue: #e8eaf0;
+  --peach: #eeeae9;
+  --orange: #f0a04b;
+  --yellow: #fff9e3;
+  --fg: #333;
+  --bg: #ffffff;
+  --border: #adb2d4;
+  --link: #c6dbd7;
+  --link-hover: #f0a04b;
+  --red: #edcabf;
+
+  --yellow-pastel: #faedcb;
+  --yellow-pastel-dark: #e2d7ba;
+
+  --green-pastel: #c9e4de;
+  --green-pastel-dark: #bddbd4;
+
+  --blue-pastel: #c6def1;
+  --purple-pastel: #dbcdf0;
+  --purple-pastel-dark: #d2c5e6;
+
+  --pink-pastel: #f2c6de;
+  --orange-pastel: #f7d9c4;
+  --shadow: 0 0 12px rgba(0, 0, 0, 0.317);
+}
+
+/* Custom Classes */
+.btn-custom-1 {
+  background-color: var(--yellow-pastel);
+  color: var(--fg);
+  border-radius: 50px;
+  box-shadow: var(--shadow);
+}
+.btn-custom-1:hover {
+  background-color: var(--yellow-pastel-dark);
+  color: var(--fg);
+}
+.btn-custom-2 {
+  background-color: var(--purple-pastel);
+  color: var(--fg);
+  border-radius: 50px;
+  box-shadow: var(--shadow);
+}
+.btn-custom-2:hover {
+  background-color: var(--purple-pastel-dark);
+  color: var(--fg);
+}
+
+/* Custom Colors */
+.colors {
+  color: var(--fg);
+  background-color: var(--bg);
+}
+.bg-1 {
+  background-color: var(--teal);
+}
+.bg-2 {
+  background-color: var(--green);
+}
+.bg-3 {
+  background-color: var(--peach);
+}
+.bg-4 {
+  background-color: var(--yellow);
+}
+.bg-5 {
+  background-color: var(--blue);
+}
+.bg-6 {
+  background-color: var(--link);
+}
+.bg-7 {
+  background-color: var(--border);
+}
+.bg-8 {
+  background-color: var(--red);
+}
+.brand-1 {
+  color: #00d74b;
+}
+.brand-2 {
+  color: #f3531d;
+}
+.brand-3 {
+  color: var(--fg);
+}
+.brand-4 {
+  color: #006aff;
+}
+
+*,
+body {
+  /* color: var(--teal); */
+  color: var(--fg);
+  /* background-color: var(--bg); */
+  font-family: 'Roboto', sans-serif;
+  /* margin: 0; */
+  /* padding: 0; */
+  max-width: 100%;
+  /* overflow-x: hidden; */
+}
+
+#navbar.navbar {
+  background-color: var(--blue-pastel);
+  padding: 0;
+}
+#navbar-container {
+  background-color: var(--blue-pastel);
+
+  padding: 4px 8px;
+}
+
+#navbar-container * {
+  background-color: var(--blue-pastel);
+}
+
+/* Generic */
+section {
+  padding: 6rem 0;
+  height: 500px;
+}
+/* Cards */
+.card {
+  background-color: white;
+  /* background-color: var(--green); */
+
+  border: 0;
+  border-radius: 4px;
+  box-shadow: 0 0 9px rgba(0, 0, 0, 0.233);
+  margin: 8px;
+  /* padding: 8px; */
+}
+.card-header {
+  background-color: var(--green);
+}
+
+/* summerNote */
+.summernote-div {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 300px;
+  overflow: hidden !important;
+}
+#id_description_iframe {
+  height: 300px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+}
+
+/* Task List */
+#tasks-accordion {
+  margin: 8px;
+}
+/* .accordion-button:not(.collapsed)::after,
+.accordion-button::after {
+  content: '^';
+} */
+
+/* Create Task Modal */
+.modal {
+  /* width: 80%; */
+}
