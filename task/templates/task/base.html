@@ -33,7 +33,7 @@
         <!-- Navigation -->
         <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-white">
             <div id="navbar-container" class="container-fluid">
-                <a class="navbar-brand" href="{% url 'home' %}"><i class="fa-solid fa-list-check"> </i><span class="brand-1">  To<span class="brand-2">Do</span><span class="brand-3">|<span class="brand-4">Guru</span></span></span></a>
+                <a class="navbar-brand" href="{% url 'home' %}"><i class="xfa-solid xfa-list-check"> </i><span class="brand-1">  To<span class="brand-2">Do</span><span class="brand-3">|<span class="brand-4">Guru</span></span></span></a>
                 <button class="navbar-toggler"
                         type="button"
                         data-bs-toggle="collapse"
@@ -85,6 +85,48 @@
         {% block content %}
             <!-- Content Goes here -->
         {% endblock content %}
+        <footer class="bg-1 text-white text-center sh">
+            <div class="container p-4">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                        <h5 class="text-uppercase">ToDoGuru</h5>
+                        <p>Your ultimate task management tool. Organize your tasks, set priorities, and stay on top of your to-do list.</p>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                        <h5 class="text-uppercase">Links</h5>
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                <a href="{% url 'home' %}" class="text-dark">Home</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'about' %}" class="text-dark">About</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'index' %}" class="text-dark">Tasks</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                        <h5 class="text-uppercase">Follow Us</h5>
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                <a href="https://github.com/yourusername" class="text-dark"><i class="fab fa-github"></i> GitHub</a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/yourusername" class="text-dark"><i class="fab fa-twitter"></i> Twitter</a>
+                            </li>
+                            <li>
+                                <a href="https://facebook.com/yourusername" class="text-dark"><i class="fab fa-facebook"></i> Facebook</a>
+                            </li>
+                            <li>
+                                <a href="https://linkedin.com/in/yourusername" class="text-dark"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center p-3">© 2025 ToDoGuru. All rights reserved.</div>
+        </footer>
         <!-- Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
@@ -96,6 +138,7 @@
         <!-- Custom JS -->
         {% comment %} <script src="assets/js/scripts.js"></script> {% endcomment %}
         <!-- Additional JS files can be included here -->
-        {% block extra_js %}{% endblock %}
+        {% block extra_js %}
+        {% endblock %}
     </body>
 </html>

@@ -27,50 +27,30 @@ def about(request):
 
 @login_required
 def index(request):
-    tasks = Task.objects.filter(user=request.user)
+    tasks = Task.objects.filter(user=request.user).order_by("-status", "-created")
     form = TaskForm()
 
     context = {"tasks": tasks, "form": form}
     return render(request, "task/tasks.html", context)
 
 
-# def task_board(request):
-#     status_filter = request.GET.get("status")
-#     priority_filter = request.GET.get("priority")
-#     due_date_filter = request.GET.get("due_date")
-
-#     tasks = Task.objects.filter(user=request.user)
-
-#     if status_filter:
-#         tasks = tasks.filter(status=status_filter)
-#     if priority_filter:
-#         tasks = tasks.filter(priority=priority_filter)
-#     if due_date_filter:
-#         tasks = tasks.filter(due_date=due_date_filter)
-
-#     not_started_tasks = tasks.filter(status="N")
-#     in_progress_tasks = tasks.filter(status="I")
-#     completed_tasks = tasks.filter(status="C")
-
-#     context = {
-#         "not_started_tasks": not_started_tasks,
-#         "in_progress_tasks": in_progress_tasks,
-#         "completed_tasks": completed_tasks,
-#     }
-#     return render(request, "task/task_board.html", context)
-
-
 @login_required
 def task_board(request):
-    not_started_tasks = Task.objects.filter(user=request.user, status="P")
-    in_progress_tasks = Task.objects.filter(user=request.user, status="IP")
-    completed_tasks = Task.objects.filter(user=request.user, status="C")
-    context = {
-        "not_started_tasks": not_started_tasks,
-        "in_progress_tasks": in_progress_tasks,
-        "completed_tasks": completed_tasks,
-    }
-    return render(request, "task/task_board.html", context)
+    order_by = request.GET.get("order_by", "status")  # Default ordering by status
+    tasks = Task.objects.filter(user=request.user).order_by(order_by)
+    not_started_tasks = tasks.filter(status="P")
+    in_progress_tasks = tasks.filter(status="IP")
+    completed_tasks = tasks.filter(status="C")
+    return render(
+        request,
+        "task/task_board.html",
+        {
+            "not_started_tasks": not_started_tasks,
+            "in_progress_tasks": in_progress_tasks,
+            "completed_tasks": completed_tasks,
+            "order_by": order_by,
+        },
+    )
 
 
 @login_required

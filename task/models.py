@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django_summernote.fields import SummernoteTextField
+from django.utils import timezone
 
 
 # Create your models here.
@@ -35,6 +36,11 @@ class Task(models.Model):
     priority = models.CharField(max_length=1, choices=PRIORITY_CHOICES, default="M")
     category = models.CharField(max_length=1, choices=CATEGORY_CHOICES, default="O")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def save(self, *args, **kwargs):
+        if self.status == "C" and self.completed_date is None:
+            self.completed_date = timezone.now()
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title

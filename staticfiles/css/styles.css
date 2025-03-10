@@ -2,7 +2,7 @@
   --teal: #e5fff9;
   --beige: #f3f0e1;
   --green: #d5e5d5;
-  --blue: #e8eaf0;
+  --blue: #e7e9f0;
   --peach: #eeeae9;
   --orange: #f0a04b;
   --yellow: #fff9e3;
@@ -29,6 +29,21 @@
 }
 
 /* Custom Classes */
+.btn-new-task {
+  background-color: var(--green-pastel);
+  color: var(--fg);
+  border: 0;
+  border-radius: 50%;
+  box-shadow: var(--shadow);
+  /* padding: 12px; */
+  width: 50px;
+  height: 50px;
+  font-size: 1rem;
+}
+.btn-new-task i {
+  width: 25px;
+  height: 25px;
+}
 .btn-custom-1 {
   background-color: var(--yellow-pastel);
   color: var(--fg);
@@ -78,6 +93,9 @@
 }
 .bg-8 {
   background-color: var(--red);
+}
+.bg-9 {
+  background-color: var(--blue-pastel);
 }
 .brand-1 {
   color: #00d74b;
@@ -156,6 +174,46 @@ section {
 #tasks-accordion {
   margin: 8px;
 }
+.accordion-button {
+  background-color: var(--green-pastel);
+  color: var(--fg);
+  border: 0;
+  border-radius: 50px !important;
+  /* box-shadow: 0 0 9px rgba(0, 0, 0, 0.233); */
+  margin: 8px;
+  padding: 8px;
+  /* display: flex; */
+  /* align-items: center; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  /* justify-content: space-between; */
+}
+.accordion-button .d-flex {
+  flex-grow: 1;
+}
+.accordion-button .d-flex:first-child {
+  justify-content: flex-start;
+}
+.accordion-button .d-flex:nth-child(2) {
+  justify-content: center;
+}
+.accordion-button .d-flex:last-child {
+  justify-content: flex-end;
+}
+
+.accordion-button::after {
+  content: '';
+  margin-left: 10px;
+  margin-right: 5px;
+}
+.accordion-button:focus {
+  box-shadow: none;
+}
+.accordion-body {
+  border-radius: 15px;
+}
 /* .accordion-button:not(.collapsed)::after,
 .accordion-button::after {
   content: '^';
@@ -164,4 +222,7 @@ section {
 /* Create Task Modal */
 .modal {
   /* width: 80%; */
+}
+section#cta {
+  height: auto;
 }

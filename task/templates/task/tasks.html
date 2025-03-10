@@ -7,6 +7,14 @@
             class="btn btn-primary"
             data-bs-toggle="modal"
             data-bs-target="#new-task">Create New Task</button>
+    <!-- Button trigger modal -->
+    <button type="button"
+            class="btn btn-new-task"
+            data-bs-toggle="modal"
+            data-bs-target="#new-task">
+        +
+        {% comment %} <i class="fa-solid fa-plus"></i> {% endcomment %}
+    </button>
     <!-- Modal -->
     <div class="modal fade modal-xl"
          id="new-task"
@@ -36,112 +44,93 @@
             </div>
         </div>
     </div>
-    {% comment %} <form method="post" action="{% url 'create_task' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Create Task" class="btn btn-success">
-    </form> {% endcomment %}
-    {% comment %} {% for t in tasks %}
-        <div id="task-{{ t.id }}">
-            <a href="{% url 'update_task' t.id %}" class="btn btn-primary">Update</a>
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-task-id="{{ t.id }}" data-task-title="{{ t.title }}">Delete</button>
-            <h3>{{ t.title }}</h3>
-            <p>{{ t.get_status_display }}</p>
-            <p>{{ t.created }}</p>
-            <p>{{ t.due_date }}</p>
-            <p>{{ t.get_priority_display }}</p>
-            <p>{{ t.description }}</p>
-            <p>{{ t.get_category_display }}</p>
-            <p>{{ t.user }}</p>
-            <p>{{ t.completed }}</p>
-            <p>{{ t.completed_date }}</p>
-        </div>
-    {% endfor %} {% endcomment %}
     <div class="m-4">
         <div class="accordion accordion-flush" id="tasks-accordion">
             {% for t in tasks %}
-                <div class="accordion-item border-2 shadow-lg">
-                    <h2 class="accordion-header border-2">
-                        <button class="accordion-button collapsed"
+                <div class="accordion-item border-0 xshadow-lg">
+                    <h2 class="accordion-header xborder-2">
+                        <button class="m-0 my-1 accordion-button collapsed container-fluid"
                                 type="button"
                                 data-bs-toggle="collapse"
                                 data-bs-target="#flush-collapse{{ t.id }}"
                                 aria-expanded="false"
                                 aria-controls="flush-collapse{{ t.id }}">
-                            {% if t.priority == 'H' %}
-                                <i class="fa-solid fa-exclamation-circle text-danger me-2">  </i>
-                            {% elif t.priority == 'M' %}
-                                <i class="fa-solid fa-exclamation-triangle text-warning me-2">   </i>
-                            {% elif t.priority == 'L' %}
-                                <i class="fa-solid fa-check-circle text-success me-2">   </i>
-                            {% else %}
-                                <i class="fa-solid fa-circle text-muted me-2"></i>
-                            {% endif %}
-                            {{ t.title }}
-                            <span class="ms-auto">Due: {{ t.due_date|date:"Y-j-f" }}</span>
-                        </button>
-                    </h2>
-                    <div id="flush-collapse{{ t.id }}"
-                         class="accordion-collapse collapse"
-                         data-bs-parent="#tasks-accordion">
-                        <div class="accordion-body">
-                            <p>Status: {{ t.get_status_display }}</p>
-                            <p>Created: {{ t.created }}</p>
-                            <p>Due Date: {{ t.due_date }}</p>
-                            <p>Priority: {{ t.get_priority_display }}</p>
-                            <p>Description: {{ t.description|safe }}</p>
-                            <p>Category: {{ t.get_category_display }}</p>
-                            <p>User: {{ t.user }}</p>
-                            {% comment %} <p>{{ t.completed }}</p> {% endcomment %}
-                            <p>Completed Date: {{ t.completed_date }}</p>
-                            <div class="ms-auto">
-                                <a href="{% url 'update_task' t.id %}" class="btn btn-primary">Update</a>
-                                <button type="button"
-                                        class="btn btn-danger"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#deleteModal"
-                                        data-task-id="{{ t.id }}"
-                                        data-task-title="{{ t.title }}">Delete</button>
+                            <div class="row w-100">
+                                <span class="col-lg-4">
+                                    {% if t.priority == 'H' %}
+                                        <i class="fa-solid fa-exclamation-circle text-danger me-2">    </i>
+                                    {% elif t.priority == 'M' %}
+                                        <i class="fa-solid fa-exclamation-triangle text-warning me-2">    </i>
+                                    {% elif t.priority == 'L' %}
+                                        <i class="fa-solid fa-check-circle text-success me-2">   </i>
+                                    {% else %}
+                                        <i class="fa-solid fa-circle text-muted me-2">    </i>
+                                    {% endif %}
+                                {{ t.title }}</span>
+                                <span class="col-lg-4">Status: {{ t.get_status_display }}</span>
+                                <span class="col-lg-4">Due: {{ t.due_date|date:"Y-j-f" }}</span>
+                            </button>
+                        </h2>
+                        <div id="flush-collapse{{ t.id }}"
+                             class="accordion-collapse collapse"
+                             data-bs-parent="#tasks-accordion">
+                            <div class="bg-4 accordion-body">
+                                <p>Status: {{ t.get_status_display }}</p>
+                                <p>Created: {{ t.created }}</p>
+                                <p>Due Date: {{ t.due_date }}</p>
+                                <p>Priority: {{ t.get_priority_display }}</p>
+                                <p>Description: {{ t.description|safe }}</p>
+                                <p>Category: {{ t.get_category_display }}</p>
+                                <p>User: {{ t.user }}</p>
+                                <p>Completed Date: {{ t.completed_date }}</p>
+                                <div class="ms-auto">
+                                    <a href="{% url 'update_task' t.id %}" class="btn btn-primary">Update</a>
+                                    <button type="button"
+                                            class="btn btn-danger"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#deleteModal"
+                                            data-task-id="{{ t.id }}"
+                                            data-task-title="{{ t.title }}">Delete</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
-    </div>
-    <!-- Delete Confirmation Modal -->
-    <div class="modal fade"
-         id="deleteModal"
-         tabindex="-1"
-         role="dialog"
-         aria-labelledby="deleteModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Delete Task</h5>
-                    <button type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to delete the task "<span id="taskTitle"></span>"?
-                </div>
-                <div class="modal-footer">
-                    <form id="deleteForm" method="post">
-                        {% csrf_token %}
-                        <input type="submit" value="Confirm Delete" class="btn btn-danger">
-                    </form>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <!-- Delete Confirmation Modal -->
+        <div class="modal fade"
+             id="deleteModal"
+             tabindex="-1"
+             role="dialog"
+             aria-labelledby="deleteModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Delete Task</h5>
+                        <button type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete the task "<span id="taskTitle"></span>"?
+                    </div>
+                    <div class="modal-footer">
+                        <form id="deleteForm" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="Confirm Delete" class="btn btn-danger">
+                        </form>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-{% endblock %}
-{% block extra_js %}
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
+    {% endblock %}
+    {% block extra_js %}
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
     $('#deleteModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
         var taskId = button.data('task-id') // Extract info from data-* attributes
@@ -168,5 +157,5 @@
             }
         });
     });
-    </script>
-{% endblock %}
+        </script>
+    {% endblock %}
